@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 
-const ListUser = () => {
-  const [users, setUsers] = useState();
-  const [error, seterror] = useState(null);
-
+const List = () => {
+  const [list, setList] = useState();
   useEffect(() => {
     const sendRequest = async () => {
       try {
@@ -14,33 +12,31 @@ const ListUser = () => {
         if (!response.ok) {
           throw new Error(responseData.message);
         }
-        setUsers(responseData.existingUser);
-      } catch (err) {
-        seterror(err.message);
-      }
+        setList(responseData.existingUser);
+      } catch (err) {}
     };
     sendRequest();
   }, []);
-
-  console.log(users);
-
+  console.log(list);
   return (
     <div>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
+            <th>Id</th>
             <th>Name</th>
-            <th>Email</th>
+            <th>email</th>
           </tr>
         </thead>
-        {users &&
-          users.map((user, key) => (
+        {list &&
+          list.map((l, key) => (
             <tbody>
               <tr>
                 <td>{key}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
+                <td>{l._id}</td>
+                <td>{l.name}</td>
+                <td>{l.email}</td>
               </tr>
             </tbody>
           ))}
@@ -49,4 +45,4 @@ const ListUser = () => {
   );
 };
 
-export default ListUser;
+export default List;

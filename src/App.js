@@ -2,10 +2,11 @@ import React, { useCallback, useState } from "react";
 import "./App.css";
 import Login from "./pages/login ";
 import Home from "./pages/home";
-import ListUser from "./pages/listUser";
 import { BrowserRouter, Route } from "react-router-dom";
 import { AuthContext } from "./context/auth";
-import AddUser from "./pages/addUser";
+import List from "./pages/list";
+import Ajout from "./pages/ajout";
+
 
 function App() {
   const [isloggedIn, setIsloggedIn] = useState(false);
@@ -19,9 +20,9 @@ function App() {
   });
   let routes;
   if (isloggedIn) {
-    routes = <Route path="/" exact component={ListUser} />;
+    routes = <Route path="/" exact component={Home} />;
   } else {
-    routes = <Route path="/" exact component={AddUser} />;
+    routes = <Route path="/" exact component={Ajout} />;
   }
   return (
     <AuthContext.Provider
